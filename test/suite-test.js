@@ -15,9 +15,9 @@ const timeOut = 30000;
 
 test.describe('Suite Demo-Redmine', function () {
 
-    var usuario = 'demo-mocha4';
-    var projeto = 'Projeto-Mocha4';
-    var email = 'test4@test.com';
+    var usuario = 'demo-mocha5';
+    var projeto = 'Projeto-Mocha5';
+    var email = 'test5@test.com';
 
     this.timeout(timeOut);
 
