@@ -15,9 +15,9 @@ const timeOut = 30000;
 
 test.describe('Suite Demo-Redmine', function () {
 
-    var usuario = 'demo-mocha3';
-    var projeto = 'Projeto-Mocha3';
-    var email = 'test3@test.com';
+    var usuario = 'demo-mocha4';
+    var projeto = 'Projeto-Mocha4';
+    var email = 'test4@test.com';
 
     this.timeout(timeOut);
 
@@ -104,6 +104,8 @@ test.describe('Suite Demo-Redmine', function () {
 
         var json = require('./files/issues');
 
+        this.timeout(120000);
+
         json.issues.forEach(function (issue) {
             newIssuePage.informeSubject(issue.Subject);
             newIssuePage.informeDescription(issue.Description);
@@ -113,6 +115,7 @@ test.describe('Suite Demo-Redmine', function () {
         });
 
         projectPage.clickIssue();
+        this.timeout(15000);
 
         done();
     });
