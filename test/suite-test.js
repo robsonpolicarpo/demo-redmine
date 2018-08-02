@@ -95,6 +95,8 @@ test.describe('Suite Demo-Redmine', function () {
 
     test.it('Cadastrar issues', function (done) {
 
+        this.timeout(240000);
+
         homePage = new HomePage(driver);
         var projectPage = new ProjectPage(driver);
         var newIssuePage = new NewIssuePage(driver);
@@ -103,8 +105,6 @@ test.describe('Suite Demo-Redmine', function () {
         projectPage.clickNewIssue();
 
         var json = require('./files/issues');
-
-        this.timeout(120000);
 
         json.issues.forEach(function (issue) {
             newIssuePage.informeSubject(issue.Subject);
@@ -115,7 +115,6 @@ test.describe('Suite Demo-Redmine', function () {
         });
 
         projectPage.clickIssue();
-        this.timeout(15000);
 
         done();
     });
