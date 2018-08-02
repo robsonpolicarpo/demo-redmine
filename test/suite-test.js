@@ -1,5 +1,3 @@
-var assert = require('assert');
-// var selenium = require('selenium-webdriver');
 var test = require('selenium-webdriver/testing');
 var driver;
 var homePage;
@@ -16,11 +14,14 @@ const timeOut = 30000;
 
 test.describe('Suite Demo-Redmine', function () {
 
+    var usuario = 'demo-mocha';
+    var projeto = 'Projeto-Mocha1';
+
     this.timeout(timeOut);
 
     test.before(function () {
         driver = require('./driver').getDriver();
-        // driver.manage().window().maximize();
+        driver.manage().window().maximize();
         indexPage = new IndexPage(driver);
         indexPage.view()
     });
@@ -30,30 +31,28 @@ test.describe('Suite Demo-Redmine', function () {
             driver.quit();
     });
 
-    /*test.it('Registrar usuário', function (done) {
+    test.it('Registrar usuário', function (done) {
         var indexPage = new IndexPage(driver);
         var homePage = new HomePage(driver);
         var registerPage = new RegisterPage(driver);
 
         indexPage.view();
         indexPage.clickRegister();
-        registerPage.informeLogin('demo-mocha1');
+        registerPage.informeLogin(usuario);
         registerPage.informePassword('12345');
         registerPage.informeConfirmation('12345');
-        registerPage.informeFirstName('Demo');
+        registerPage.informeFirstName('MyName');
         registerPage.informeLastName('Mocha Webdriver');
         registerPage.informeEmail('teste@teste.com');
         registerPage.submit();
         driver.sleep(1000);
 
-        var msgEsperada = 'Your account has been activated. You can now log in.';
-
-        assert.equal(homePage.obtemMensagem(), msgEsperada, 'Registro realizado com sucesso');
+        homePage.verificaMsg('Your account has been activated. You can now log in.');
 
         homePage.clickLogout();
 
         done()
-    });*/
+    });
 
     test.it('Realizar login', function (done) {
 
@@ -62,11 +61,12 @@ test.describe('Suite Demo-Redmine', function () {
         indexPage = new IndexPage(driver);
 
         indexPage.clickLogin();
-        loginPage.informeLogin('demo-mocha1');
+        loginPage.informeLogin(usuario);
         loginPage.informePassword('12345');
         loginPage.clickBtnLogin();
         driver.sleep(1000);
-        homePage.verificaUsuarioLogado('demo-mocha1');
+
+        homePage.verificaUsuarioLogado(usuario);
 
         done();
     });
@@ -79,14 +79,13 @@ test.describe('Suite Demo-Redmine', function () {
 
         homePage.clickProject();
         projectPage.clickNewProject();
-        newProjectPage.informeName('ProjetoTestRedmine5');
+        newProjectPage.informeName(projeto);
         newProjectPage.informeDescription('Desrição do projeto de Teste');
-        // newProjectPage.informeIdentifier('softTest99');
         newProjectPage.desmarcaTracker('Feature');
         newProjectPage.desmarcaTracker('Support');
         newProjectPage.clickCreate();
+        driver.sleep(1000);
 
-        driver.sleep(2000);
         homePage.verificaMsg('Successful creation.');
 
         done();
