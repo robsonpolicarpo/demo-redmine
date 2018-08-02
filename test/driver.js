@@ -1,5 +1,5 @@
-var webdriver =require('selenium-webdriver'),
-  driver;
+var webdriver = require('selenium-webdriver');
+var driver;
 
 var getDriver = function() {
   if(driver) {
