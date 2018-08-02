@@ -31,5 +31,24 @@ HomePage.prototype.verificaUsuarioLogado = function (usuarioEsperado) {
     });
 };
 
+HomePage.prototype.selecioneProjeto = function (valor) {
+    var element = this.driver.findElement(webdriver.By.id('project_quick_jump_box'));
+    element.click();
+    this.driver.sleep(1000);
+    selectByVisibleText(element, valor);
+};
+
+function selectByVisibleText(select, textDesired) {
+    select.findElements(webdriver.By.tagName('option'))
+        .then(options => {
+            options.map(option => {
+                option.getText().then(text => {
+                    if (text === textDesired)
+                        option.click();
+                });
+            });
+        });
+}
+
 
 module.exports = HomePage;

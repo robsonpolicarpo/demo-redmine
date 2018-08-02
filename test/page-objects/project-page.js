@@ -17,6 +17,14 @@ ProjectPage.prototype.clickLogout = function () {
     return this.driver.findElement(webdriver.By.className('logout')).click();
 };
 
+ProjectPage.prototype.clickNewIssue = function () {
+    return this.driver.findElement(webdriver.By.className('new-issue')).click();
+};
+
+ProjectPage.prototype.clickIssue = function () {
+    return this.driver.findElement(webdriver.By.linkText('Issues')).click();
+};
+
 ProjectPage.prototype.verificaUsuarioLogado = function (usuarioEsperado) {
     return this.driver.findElement(webdriver.By.id('loggedas')).getText().then(function (usuarioEncontrado) {
         assert.ok(usuarioEncontrado.includes(usuarioEsperado), 'Usuário logado com sucesso');

@@ -9,14 +9,15 @@ var RegisterPage = require('./page-objects/register-page');
 var LoginPage = require('./page-objects/login-page');
 var ProjectPage = require('./page-objects/project-page');
 var NewProjectPage = require('./page-objects/new-project-page');
+var NewIssuePage = require('./page-objects/new-issue-page');
 
 const timeOut = 30000;
 
 test.describe('Suite Demo-Redmine', function () {
 
-    var usuario = 'demo-mocha';
-    var projeto = 'Projeto-Mocha1';
-    var email = 'test2@test.com';
+    var usuario = 'demo-mocha3';
+    var projeto = 'Projeto-Mocha3';
+    var email = 'test3@test.com';
 
     this.timeout(timeOut);
 
@@ -88,6 +89,30 @@ test.describe('Suite Demo-Redmine', function () {
         driver.sleep(1000);
 
         homePage.verificaMsg('Successful creation.');
+
+        done();
+    });
+
+    test.it('Cadastrar issues', function (done) {
+
+        homePage = new HomePage(driver);
+        var projectPage = new ProjectPage(driver);
+        var newIssuePage = new NewIssuePage(driver);
+
+        homePage.selecioneProjeto(projeto);
+        projectPage.clickNewIssue();
+
+        var json = require('./files/issues');
+
+        json.issues.forEach(function (issue) {
+            newIssuePage.informeSubject(issue.Subject);
+            newIssuePage.informeDescription(issue.Description);
+            newIssuePage.selecionePriority(issue.Priority);
+            newIssuePage.clickCreateAndContinue();
+            driver.sleep(1000);
+        });
+
+        projectPage.clickIssue();
 
         done();
     });
