@@ -16,6 +16,7 @@ test.describe('Suite Demo-Redmine', function () {
 
     var usuario = 'demo-mocha';
     var projeto = 'Projeto-Mocha1';
+    var email = 'test2@test.com';
 
     this.timeout(timeOut);
 
@@ -43,7 +44,7 @@ test.describe('Suite Demo-Redmine', function () {
         registerPage.informeConfirmation('12345');
         registerPage.informeFirstName('MyName');
         registerPage.informeLastName('Mocha Webdriver');
-        registerPage.informeEmail('teste@teste.com');
+        registerPage.informeEmail(email);
         registerPage.submit();
         driver.sleep(1000);
 
